@@ -85,9 +85,10 @@ Vagrant.configure("2") do |config|
     #apt-get install -y cuda
     # get the corpus data - in this case FONGBE experiment
     cd /vagrant
-    svn co https://github.com/besacier/ALFFA_PUBLIC/trunk/ASR/FONGBE
+    #svn co https://github.com/besacier/ALFFA_PUBLIC/trunk/ASR/FONGBE
+    svn co https://github.com/gauthelo/kaldi_wolof_asr.git
     cd /home/${user}
-    ln -s /vagrant/FONGBE .
+    ln -s /vagrant/WOLOF .
     # temporary: replace scripts with versions that work for VM
     cp /vagrant/*.sh /vagrant/WOLOF/kaldi-scripts
     cp /vagrant/path.sh /vagrant/WOLOF
