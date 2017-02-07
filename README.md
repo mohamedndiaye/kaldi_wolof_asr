@@ -1,10 +1,9 @@
 # kaldi_wolof_asr
-[comment]: <> Everything to built an ASR for Wolof (standard)
 
 Virtual Machine Vagrantfile for ALFFA_PUBLIC WOLOF ASR experiment
 
 This is the Vagrantfile and some modified scripts to implement a Vagrant virtual machine
-that can run the WOLOF African ASR experiment from [ALFFA_PUBLIC](http://github.com/besacier/ALFFA_PUBLIC/ASR/WOLOF)
+that can run the WOLOF African ASR experiment from [ALFFA_PUBLIC](https://github.com/besacier/ALFFA_PUBLIC/tree/master/ASR/WOLOF)
 
 To run it, first we assume you have installed the latest versions of Vagrant and VirtualBox.
 Also assume you've cloned this GitHub repository into a local folder and have the handful of scripts
