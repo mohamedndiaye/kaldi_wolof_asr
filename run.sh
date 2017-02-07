@@ -16,7 +16,7 @@ utils/prepare_lang.sh data/local/dict "<UNK>" data/local/lang data/lang
 ./kaldi-scripts/04_data_prep.sh
 #Compute MFCC
 echo "compute mfcc for train dev test..."
-for dir in train dev test
+for dir in "train" "dev" "test"
 do
   steps/make_mfcc.sh --nj 4 data/$dir data/exp/make_mfcc/$dir data/$dir/mfcc
   steps/compute_cmvn_stats.sh data/$dir data/exp/make_mfcc/$dir data/$dir/mfcc

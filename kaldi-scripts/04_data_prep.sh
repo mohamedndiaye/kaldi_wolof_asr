@@ -8,13 +8,11 @@
 echo "make utt2spk and spk2utt for train dev test..."
 for dir in data/train data/dev data/test
 do
-  pushd $dir
-    cat text | cut -d' ' -f1 > utt
-    cat text | cut -d'_' -f2 > spk
-    paste utt spk > utt2spk
-    utils/utt2spk_to_spk2utt.pl utt2spk | sort -k1 > spk2utt
-    rm utt spk
-  popd
+  cat $dir/text | cut -d' ' -f1 > $dir/utt
+  cat $dir/text | cut -d'_' -f2 > $dir/spk
+  paste $dir/utt $dir/spk > $dir/utt2spk
+  utils/utt2spk_to_spk2utt.pl $dir/utt2spk | sort -k1 > $dir/spk2utt
+  rm $dir/utt $dir/spk
 done
 echo -e "utt2spk and spk2utt created for train dev test.\n"
 
@@ -23,7 +21,7 @@ echo "make wav.scp for train dev test..."
 for dir in data/train data/dev data/test
 do
   pushd $dir
-    readlink -e */*.wav > tutu1 
+    readlink -e wav/*/*.wav > tutu1 
     cat tutu1 | awk -F'/' '{print $NF}' | sed 's/.wav//g' > tutu2 # get the final field as the recording name, remove .wav
     paste tutu2 tutu1 > wav.scp
     rm tutu2 tutu1
