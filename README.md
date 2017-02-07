@@ -58,5 +58,5 @@ DNNs + sMBR <sup>2</sup>           |                `20.0`               |      
 
 
 #### REFERENCES
-<sup>1</sup> [KALDI](http://kaldi-asr.org/doc/tutorial_running.html)
+<sup>1</sup> [KALDI tutorial](http://kaldi-asr.org/doc/tutorial_running.html)    
 <sup>2</sup> As it is recommended to run the DNN training using GPU, the process has been commentated at the end of *run.sh* and must be run manually.
