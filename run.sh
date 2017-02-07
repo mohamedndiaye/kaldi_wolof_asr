@@ -84,7 +84,7 @@ steps/decode_fmllr.sh --nj 2 --cmd utils/run.pl exp/system1/tri3b/graph $DATA_DI
 steps/decode_fmllr.sh --nj 2 --cmd utils/run.pl exp/system1/tri3b/graph $DATA_DIR/test exp/system1/tri3b/decode_test
 
 # HMM/GMM aligments
-steps/align_fmllr.sh --nj 14 data/train data/lang exp/system1/tri3b exp/system1/tri3b_ali
+steps/align_fmllr.sh --nj 14 --cmd utils/run.pl data/train data/lang exp/system1/tri3b exp/system1/tri3b_ali
 
 
 ### Triphone + LDA and MLLT + SAT and FMLLR + fMMI and MMI
