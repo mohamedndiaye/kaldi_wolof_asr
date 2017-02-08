@@ -10,13 +10,10 @@ The package contains Wolof speech corpus with audio data in the directory *data/
 3. **test** - speech data and transcription (verified) for testing the ASR system (Kaldi ASR format)    
 4. **dev_unverified** - original speech data and transcription (NOT verified, contains mispronunciations)    
 5. **test_unverified** - original speech data and transcription (NOT verified, contains mispronunciations)    
-6. **local** - for now, contains the Wolof vocabulary. Once you will ran the *run.sh* script it will contain the *dict/* and *lang/* directories needed to build the ASR system.    
+6. **local** - for now, contains the Wolof vocabulary (one without vowel length contrast, and another one containing vowel length contrasted units). Once you will ran the *run.sh* script it will contain the *dict/* and *lang/* directories needed to build the ASR system.
 
 *LM/* directory contains 2 text corpus, the language model and its perplexity computed from the *dev* and *test* datasets.    
                   
-The package contains also 2 *lang/* directories to build whether an ASR system without vowel length contrast modelling whether with vowel length contrast modelling.    
-1. **lang** - contains the lexicon without vowel length tag    
-2. **lang_lengthLabel**  - contains the lexicon with vowel length tag (on /a/,/e/,/E/,/o/,/O/)
 
 #### PUBLICATION ON WOLOF SPEECH & LM DATA    
 More details on the corpus and how it was collected can be found on the following publication (please cite this bibtex if you use this data).     
