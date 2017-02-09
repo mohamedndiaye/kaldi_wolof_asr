@@ -34,7 +34,7 @@ echo
 echo "===== MONO TRAINING ====="
 echo
 # Training
-steps/train_mono.sh --nj 14 --cmd utils/run.pl data/train data/lang exp/system1/mono
+steps/train_mono.sh --nj 6 --cmd utils/run.pl data/train data/lang exp/system1/mono
 echo
 echo "===== MONO DECODING ====="
 echo
@@ -46,7 +46,7 @@ steps/decode.sh --nj 2 --cmd utils/run.pl exp/system1/mono/graph data/test exp/s
 echo
 echo "===== MONO ALIGNMENT ====="
 echo
-steps/align_si.sh --boost-silence 1.25 --nj 14 --cmd utils/run.pl data/train data/lang exp/system1/mono exp/system1/mono_ali
+steps/align_si.sh --boost-silence 1.25 --nj 6 --cmd utils/run.pl data/train data/lang exp/system1/mono exp/system1/mono_ali
 
 ## Triphone
 echo
@@ -66,7 +66,7 @@ steps/decode.sh --nj 2 --cmd utils/run.pl exp/system1/tri1/graph data/test exp/s
 echo
 echo "===== TRI1 (first triphone pass) ALIGNMENT ====="
 echo
-steps/align_si.sh --nj 14 --cmd utils/run.pl data/train data/lang exp/system1/tri1 exp/system1/tri1_ali
+steps/align_si.sh --nj 6 --cmd utils/run.pl data/train data/lang exp/system1/tri1 exp/system1/tri1_ali
 
 ## Triphone + Delta Delta
 echo
@@ -85,7 +85,7 @@ steps/decode.sh --nj 2 --cmd utils/run.pl exp/system1/tri2a/graph data/test exp/
 echo
 echo "===== TRI2a (second triphone pass) ALIGNMENT ====="
 echo
-steps/align_si.sh --nj 14 --cmd utils/run.pl data/train data/lang exp/system1/tri2a exp/system1/tri2a_ali
+steps/align_si.sh --nj 6 --cmd utils/run.pl data/train data/lang exp/system1/tri2a exp/system1/tri2a_ali
 
 ## Triphone + Delta Delta + LDA and MLLT
 echo
@@ -104,7 +104,7 @@ steps/decode.sh --nj 2 --cmd utils/run.pl exp/system1/tri2b/graph $DATA_DIR/test
 echo
 echo "===== TRI2b (third triphone pass) ALIGNMENT ====="
 echo
-steps/align_si.sh --nj 14 --cmd utils/run.pl --use-graphs true data/train data/lang exp/system1/tri2b exp/system1/tri2b_ali
+steps/align_si.sh --nj 6 --cmd utils/run.pl --use-graphs true data/train data/lang exp/system1/tri2b exp/system1/tri2b_ali
 
 ## Triphone + Delta Delta + LDA and MLLT + SAT and FMLLR
 echo
@@ -124,12 +124,12 @@ echo
 echo "===== TRI3b (fourth triphone pass) ALIGNMENT ====="
 echo
 # HMM/GMM aligments
-steps/align_fmllr.sh --nj 14 --cmd utils/run.pl data/train data/lang exp/system1/tri3b exp/system1/tri3b_ali
+steps/align_fmllr.sh --nj 6 --cmd utils/run.pl data/train data/lang exp/system1/tri3b exp/system1/tri3b_ali
 
 echo
 echo "===== CREATE DENOMINATOR LATTICES FOR MMI TRAINING ====="
 echo
-steps/make_denlats.sh --nj 14 --cmd utils/run.pl --sub-split 14 --transform-dir exp/system1/tri3b_ali data/train data/lang exp/system1/tri3b exp/system1/tri3b_denlats || exit 1;
+steps/make_denlats.sh --nj 6 --cmd utils/run.pl --sub-split 14 --transform-dir exp/system1/tri3b_ali data/train data/lang exp/system1/tri3b exp/system1/tri3b_denlats || exit 1;
 
 ## Triphone + LDA and MLLT + SAT and FMLLR + fMMI and MMI
 # Training
@@ -149,7 +149,7 @@ steps/decode.sh --nj 2 --cmd utils/run.pl --transform-dir exp/system1/tri3b/deco
 echo
 echo "===== DUBM3b (UBM for fMMI experiments) TRAINING ====="
 echo
-steps/train_diag_ubm.sh --silence-weight 0.5 --nj 14 --cmd utils/run.pl 600 data/train data/lang exp/system1/tri3b_ali exp/system1/dubm3b
+steps/train_diag_ubm.sh --silence-weight 0.5 --nj 6 --cmd utils/run.pl 600 data/train data/lang exp/system1/tri3b_ali exp/system1/dubm3b
 
 ## fMMI+MMI
 # Training
@@ -204,13 +204,13 @@ steps/decode_sgmm2.sh --nj 2 --cmd utils/run.pl --transform-dir exp/system1/tri3
 echo
 echo "===== SGMM2_5b2 (subspace Gaussian mixture model) ALIGNMENT ====="
 echo
-steps/align_sgmm2.sh --nj 14 --cmd utils/run.pl --transform-dir exp/system1/tri3b_ali  --use-graphs true --use-gselect true data/train data/lang exp/system1/sgmm2_5b2 exp/system1/sgmm2_5b2_ali  || exit 1; 
+steps/align_sgmm2.sh --nj 6 --cmd utils/run.pl --transform-dir exp/system1/tri3b_ali  --use-graphs true --use-gselect true data/train data/lang exp/system1/sgmm2_5b2 exp/system1/sgmm2_5b2_ali  || exit 1; 
 
 ## Denlats
 echo
 echo "===== CREATE DENOMINATOR LATTICES FOR SGMM TRAINING ====="
 echo
-steps/make_denlats_sgmm2.sh --nj 14 --cmd utils/run.pl --sub-split 14 --transform-dir exp/system1/tri3b_ali data/train data/lang exp/system1/sgmm2_5b2_ali exp/system1/sgmm2_5b2_denlats  || exit 1;
+steps/make_denlats_sgmm2.sh --nj 6 --cmd utils/run.pl --sub-split 14 --transform-dir exp/system1/tri3b_ali data/train data/lang exp/system1/sgmm2_5b2_ali exp/system1/sgmm2_5b2_denlats  || exit 1;
 
 ## SGMM+MMI
 # Training
@@ -288,7 +288,7 @@ echo
 #      $dir data/test $gmmdir $dir/log $dir/data || exit 1
 #   # train
 #   dir=$data_fmllr/train
-#   steps/nnet/make_fmllr_feats.sh --nj 14 --cmd "$train_cmd" \
+#   steps/nnet/make_fmllr_feats.sh --nj 6 --cmd "$train_cmd" \
 #      --transform-dir ${gmmdir}_ali \
 #      $dir data/train $gmmdir $dir/log $dir/data || exit 1
 #   # split the data : 90% train 10% cross-validation (held-out)
@@ -334,9 +334,9 @@ echo
 
 # if [ $stage -le 3 ]; then
 #   # First we generate lattices and alignments:
-#   steps/nnet/align.sh --nj 14 --cmd "$train_cmd" \
+#   steps/nnet/align.sh --nj 6 --cmd "$train_cmd" \
 #     $data_fmllr/train lang $srcdir ${srcdir}_ali || exit 1;
-#   steps/nnet/make_denlats.sh --nj 14 --cmd "$decode_cmd" --config conf/decode_dnn.config --acwt $acwt \
+#   steps/nnet/make_denlats.sh --nj 6 --cmd "$decode_cmd" --config conf/decode_dnn.config --acwt $acwt \
 #     $data_fmllr/train lang $srcdir ${srcdir}_denlats || exit 1;
 # fi
 
